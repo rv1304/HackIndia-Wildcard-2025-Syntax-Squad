@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Collections from "./pages/Collections";
 import Verification from "./pages/Verification";
 import Marketplace from "./pages/Marketplace";
+import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/collections" element={<Collections />} />
             <Route path="/verification" element={<Verification />} />
             <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

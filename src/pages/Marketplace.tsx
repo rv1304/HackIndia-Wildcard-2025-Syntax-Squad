@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -5,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ShoppingCart, Heart, Eye, Verified } from "lucide-react";
 
 const Marketplace = () => {
+  const navigate = useNavigate();
+  
   const featuredItems = [
     { id: 1, name: "Quantum Portal #142", price: "3.5 ETH", likes: 234, views: 1420, verified: true },
     { id: 2, name: "Digital Phoenix", price: "2.8 ETH", likes: 189, views: 982, verified: true },
@@ -91,7 +94,10 @@ const Marketplace = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground border-0">
+                    <Button 
+                      className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground border-0"
+                      onClick={() => navigate(`/product/${item.id}`)}
+                    >
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Buy Now
                     </Button>
