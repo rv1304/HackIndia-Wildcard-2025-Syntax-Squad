@@ -181,7 +181,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Section 1 – The Problem */}
       <section className="min-h-screen flex items-center py-20 px-6 bg-gradient-to-br from-destructive/5 to-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
