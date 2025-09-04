@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {TopSellers} from "@/components/TopSellers";
 import CollectionCard from "@/components/CollectionCard";
 import {
   Users,
@@ -162,77 +163,7 @@ const Home = () => {
       </section>
 
 
-      {/* MacBook Scroll Showcase */}
-      <section className="py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8 items-stretch">
-            {/* Left Card */}
-            <Card className="glass-card p-6 h-full hidden lg:flex flex-col justify-center">
-              <h3 className="text-xl font-semibold mb-3">Sellers lose credibility and revenue</h3>
-              <p className="text-muted-foreground">
-                Trust issues reduce market participation and legitimate seller profits.
-              </p>
-            </Card>
-
-            {/* MacBook Frame with Scroll */}
-            <div className="relative bg-card/40 border border-border/50 rounded-2xl shadow-2xl overflow-hidden">
-              {/* Top bar (MacBook notch) */}
-              <div className="h-8 bg-card/60 border-b border-border/50 flex items-center justify-center">
-                <div className="w-24 h-1.5 rounded-full bg-border" />
-              </div>
-              {/* Screen content */}
-              <div className="h-[60vh] overflow-y-auto p-6 space-y-6">
-                <Card className="glass-card p-6">
-                  <h4 className="font-semibold mb-2">Verified. Protected. Automated.</h4>
-                  <p className="text-muted-foreground">
-                    The AuthX Difference — a comprehensive solution that combines AI, blockchain, and real-world
-                    verification.
-                  </p>
-                </Card>
-                {solutionFeatures.map((feature, i) => (
-                  <Card key={i} className="glass-card p-5">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-gradient-primary/20 rounded-lg flex items-center justify-center">
-                        <feature.icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <div className="font-medium">{feature.title}</div>
-                        <p className="text-sm text-muted-foreground">{feature.description}</p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-                <Card className="glass-card p-6">
-                  <h4 className="font-semibold mb-2">Trust Workflow, Built-In</h4>
-                  <p className="text-muted-foreground">
-                    Our step-by-step process ensures every asset is verified, protected, and ready for secure trading.
-                  </p>
-                </Card>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {workflowSteps.map((step, index) => (
-                    <Card key={index} className="glass-card p-4 text-center">
-                      <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-2">
-                        <span className="text-primary-foreground text-sm font-bold">{index + 1}</span>
-                      </div>
-                      <div className="text-sm font-semibold">{step.step}</div>
-                      <div className="text-xs text-muted-foreground">{step.description}</div>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Card */}
-            <Card className="glass-card p-6 h-full hidden lg:flex flex-col justify-center">
-              <h3 className="text-xl font-semibold mb-3">A digital economy full of uncertainty</h3>
-              <p className="text-muted-foreground">
-                The result is a marketplace where trust is compromised and transactions are risky.
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
+      
       <section className="min-h-screen flex items-center py-20 px-6 bg-gradient-to-br from-destructive/5 to-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -326,7 +257,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      
+      </section>
 
       {/* Section 4 – Why AuthX Is Different */}
       <section className="min-h-screen flex items-center py-20 px-6">
