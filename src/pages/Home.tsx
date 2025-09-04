@@ -110,6 +110,58 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Top Sellers & Creators + Stats */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Top Sellers & Creators</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <Card className="glass-card p-6 text-center">
+              <div className="w-12 h-12 bg-gradient-primary rounded-full mx-auto mb-3" />
+              <h3 className="font-semibold">Elixir Queen</h3>
+              <p className="text-sm text-muted-foreground">Volume: 234 ETH</p>
+            </Card>
+            <Card className="glass-card p-6 text-center">
+              <div className="w-12 h-12 bg-gradient-primary rounded-full mx-auto mb-3" />
+              <h3 className="font-semibold">Pixel Wizard</h3>
+              <p className="text-sm text-muted-foreground">Volume: 189 ETH</p>
+            </Card>
+            <Card className="glass-card p-6 text-center">
+              <div className="w-12 h-12 bg-gradient-primary rounded-full mx-auto mb-3" />
+              <h3 className="font-semibold">Meta Vision</h3>
+              <p className="text-sm text-muted-foreground">Volume: 156 ETH</p>
+            </Card>
+            <Card className="glass-card p-6 text-center">
+              <div className="w-12 h-12 bg-gradient-primary rounded-full mx-auto mb-3" />
+              <h3 className="font-semibold">Crypto Sage</h3>
+              <p className="text-sm text-muted-foreground">Volume: 142 ETH</p>
+            </Card>
+          </div>
+          <div className="grid md:grid-cols-4 gap-6">
+            <Card className="glass-card p-6 text-center">
+              <Users className="w-8 h-8 text-primary mx-auto mb-3" />
+              <div className="text-3xl font-bold gradient-text">250K+</div>
+              <p className="text-sm text-muted-foreground mt-1">Active Users</p>
+            </Card>
+            <Card className="glass-card p-6 text-center">
+              <TrendingUp className="w-8 h-8 text-accent mx-auto mb-3" />
+              <div className="text-3xl font-bold gradient-text">$2.5B</div>
+              <p className="text-sm text-muted-foreground mt-1">Trading Volume</p>
+            </Card>
+            <Card className="glass-card p-6 text-center">
+              <Shield className="w-8 h-8 text-success mx-auto mb-3" />
+              <div className="text-3xl font-bold gradient-text">99.9%</div>
+              <p className="text-sm text-muted-foreground mt-1">Verified Assets</p>
+            </Card>
+            <Card className="glass-card p-6 text-center">
+              <Zap className="w-8 h-8 text-warning mx-auto mb-3" />
+              <div className="text-3xl font-bold gradient-text">&lt;2s</div>
+              <p className="text-sm text-muted-foreground mt-1">Verification Time</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+
       {/* MacBook Scroll Showcase */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
@@ -274,7 +326,66 @@ const Home = () => {
             ))}
           </div>
         </div>
+      
+
+      {/* Section 4 – Why AuthX Is Different */}
+      <section className="min-h-screen flex items-center py-20 px-6">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">Not Just NFTs. Verified Phigital Assets.</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">See how AuthX compares to traditional NFT marketplaces</p>
+          </div>
+          <Card className="glass-card p-8 w-full overflow-x-auto">
+            <table className="w-full min-w-[720px]">
+              <thead>
+                <tr className="border-b border-border/50">
+                  <th className="text-left py-4 px-6 font-semibold">Feature</th>
+                  <th className="text-center py-4 px-6 font-semibold">Traditional NFT Markets</th>
+                  <th className="text-center py-4 px-6 font-semibold">AuthX</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-border/20">
+                  <td className="py-4 px-6 font-medium">Anyone can mint</td>
+                  <td className="py-4 px-6 text-center"><CheckCircle className="w-5 h-5 text-success inline" /></td>
+                  <td className="py-4 px-6 text-center"><Ban className="w-5 h-5 text-destructive inline" /></td>
+                </tr>
+                <tr className="border-b border-border/20">
+                  <td className="py-4 px-6 font-medium">Physical inspection</td>
+                  <td className="py-4 px-6 text-center"><Ban className="w-5 h-5 text-destructive inline" /></td>
+                  <td className="py-4 px-6 text-center"><CheckCircle className="w-5 h-5 text-success inline" /></td>
+                </tr>
+                <tr className="border-b border-border/20">
+                  <td className="py-4 px-6 font-medium">AI-powered approval</td>
+                  <td className="py-4 px-6 text-center"><Ban className="w-5 h-5 text-destructive inline" /></td>
+                  <td className="py-4 px-6 text-center"><CheckCircle className="w-5 h-5 text-success inline" /></td>
+                </tr>
+                <tr className="border-b border-border/20">
+                  <td className="py-4 px-6 font-medium">Fraud detection</td>
+                  <td className="py-4 px-6 text-center"><span className="text-muted-foreground">Weak</span></td>
+                  <td className="py-4 px-6 text-center"><span className="text-primary font-semibold">Freeze + custody</span></td>
+                </tr>
+                <tr className="border-b border-border/20">
+                  <td className="py-4 px-6 font-medium">Royalties</td>
+                  <td className="py-4 px-6 text-center"><span className="text-muted-foreground">Sometimes</span></td>
+                  <td className="py-4 px-6 text-center"><span className="text-primary font-semibold">Guaranteed</span></td>
+                </tr>
+                <tr className="border-b border-border/20">
+                  <td className="py-4 px-6 font-medium">Ownership history</td>
+                  <td className="py-4 px-6 text-center"><span className="text-muted-foreground">Limited</span></td>
+                  <td className="py-4 px-6 text-center"><span className="text-primary font-semibold">Full + immutable</span></td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-6 font-medium">Transaction control</td>
+                  <td className="py-4 px-6 text-center"><span className="text-muted-foreground">Open</span></td>
+                  <td className="py-4 px-6 text-center"><span className="text-primary font-semibold">Secured by AuthX Key</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </Card>
+        </div>
       </section>
+
     </div>
   );
 };
