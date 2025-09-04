@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Home, Layers, Shield, Store, Wallet } from "lucide-react";
+import { Home, Shield, Store, Wallet, Gem } from "lucide-react";
 
 const Navbar = () => {
   const location = useLocation();
@@ -8,7 +8,6 @@ const Navbar = () => {
   const navItems = [
     { path: "/", label: "Home", icon: Home },
     { path: "/dashboard", label: "Dashboard", icon: Wallet },
-    { path: "/collections", label: "Collections", icon: Layers },
     { path: "/verification", label: "Verification", icon: Shield },
     { path: "/marketplace", label: "Marketplace", icon: Store },
   ];
@@ -17,11 +16,11 @@ const Navbar = () => {
     <nav className="glass-panel border-b border-border/30 px-6 py-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">A</span>
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <Gem className="w-6 h-6 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold gradient-text">AuthX</span>
+            <span className="text-2xl font-bold gradient-text">AuthX</span>
           </Link>
           
           <div className="hidden md:flex items-center space-x-1">
@@ -49,10 +48,8 @@ const Navbar = () => {
         </div>
         
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-            Support
-          </Button>
-          <Button className="bg-gradient-primary hover:opacity-90 text-primary-foreground border-0">
+          <Button className="bg-gradient-primary hover:opacity-90 hover:scale-105 text-primary-foreground border-0 transition-all duration-300">
+            <Wallet className="w-4 h-4 mr-2" />
             Connect Wallet
           </Button>
         </div>

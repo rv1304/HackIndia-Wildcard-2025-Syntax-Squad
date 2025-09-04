@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import StatCard from "@/components/StatCard";
 import TrustScoreCard from "@/components/TrustScoreCard";
 import ActivityFeed from "@/components/ActivityFeed";
-import { Wallet, Shield, TrendingUp, Activity } from "lucide-react";
+import { Wallet, Shield, TrendingUp, Activity, BarChart3, PieChart } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, PieChart as RechartsPieChart, Cell, Pie } from 'recharts';
 
 const Dashboard = () => {
   const holdings = [
@@ -11,6 +12,21 @@ const Dashboard = () => {
     { id: 2, name: "Crystal Shard", value: "1.8 ETH", change: "+5%" },
     { id: 3, name: "Neon Genesis", value: "2.1 ETH", change: "-3%" },
     { id: 4, name: "Void Walker", value: "5.2 ETH", change: "+18%" }
+  ];
+
+  const chartData = [
+    { month: 'Jan', value: 8.2 },
+    { month: 'Feb', value: 9.1 },
+    { month: 'Mar', value: 10.5 },
+    { month: 'Apr', value: 11.8 },
+    { month: 'May', value: 12.1 },
+    { month: 'Jun', value: 12.34 }
+  ];
+
+  const portfolioData = [
+    { name: 'Digital Art', value: 45, color: '#8b5cf6' },
+    { name: 'Collectibles', value: 30, color: '#06b6d4' },
+    { name: 'Physical Assets', value: 25, color: '#ec4899' }
   ];
 
   return (
@@ -65,43 +81,129 @@ const Dashboard = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Holdings List */}
+          {/* Portfolio Performance Chart */}
           <div className="lg:col-span-2 space-y-6">
             <Card className="glass-panel p-6">
-              <h2 className="text-xl font-semibold mb-4">Active Holdings</h2>
-              <div className="space-y-3">
-                {holdings.map((holding) => (
-                  <Card key={holding.id} className="glass-card p-4 hover:scale-[1.02] transition-all">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-primary rounded-xl" />
-                        <div>
-                          <h3 className="font-semibold text-foreground">{holding.name}</h3>
-                          <p className="text-sm text-muted-foreground">Current Value</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-semibold text-foreground">{holding.value}</p>
-                        <p className={`text-sm ${holding.change.startsWith('+') ? 'text-success' : 'text-destructive'}`}>
-                          {holding.change}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Portfolio Performance</h2>
+                <div className="flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5 text-primary" />
+                  <span className="text-sm text-muted-foreground">Last 6 months</span>
+                </div>
+              </div>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={chartData}>
+                    <defs>
+                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                    <XAxis dataKey="month" stroke="#9ca3af" />
+                    <YAxis stroke="#9ca3af" />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: '#1f2937', 
+                        border: '1px solid #374151',
+                        borderRadius: '8px'
+                      }} 
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="value" 
+                      stroke="#8b5cf6" 
+                      strokeWidth={3}
+                      fillOpacity={1} 
+                      fill="url(#colorValue)" 
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
               </div>
             </Card>
 
-            {/* Trust Score */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Holdings List */}
+              <Card className="glass-panel p-6">
+                <h2 className="text-xl font-semibold mb-4">Active Holdings</h2>
+                <div className="space-y-3">
+                  {holdings.map((holding) => (
+                    <Card key={holding.id} className="glass-card p-4 hover:scale-[1.02] hover:shadow-glow-accent transition-all duration-300">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-12 h-12 bg-gradient-primary rounded-xl animate-pulse" />
+                          <div>
+                            <h3 className="font-semibold text-foreground">{holding.name}</h3>
+                            <p className="text-sm text-muted-foreground">Current Value</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-foreground">{holding.value}</p>
+                          <p className={`text-sm transition-colors ${holding.change.startsWith('+') ? 'text-success' : 'text-destructive'}`}>
+                            {holding.change}
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </Card>
+
+              {/* Portfolio Distribution */}
+              <Card className="glass-panel p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-semibold">Portfolio Distribution</h2>
+                  <PieChart className="w-5 h-5 text-primary" />
+                </div>
+                <div className="h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsPieChart>
+                      <Pie
+                        data={portfolioData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={40}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {portfolioData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: '#1f2937', 
+                          border: '1px solid #374151',
+                          borderRadius: '8px'
+                        }} 
+                      />
+                    </RechartsPieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="space-y-2 mt-4">
+                  {portfolioData.map((item) => (
+                    <div key={item.name} className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                        <span className="text-sm text-muted-foreground">{item.name}</span>
+                      </div>
+                      <span className="text-sm font-medium">{item.value}%</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
             <TrustScoreCard 
               score={75} 
               trend="up"
               description="Your assets maintain high authenticity standards"
             />
-          </div>
-
-          {/* Activity Feed */}
-          <div>
             <ActivityFeed />
           </div>
         </div>
