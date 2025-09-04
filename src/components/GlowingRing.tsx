@@ -29,9 +29,9 @@ const GlowingRing = () => {
 
       // Create gradient
       const gradient = ctx.createLinearGradient(-radius, -radius, radius, radius);
-      gradient.addColorStop(0, "#a855f7");
-      gradient.addColorStop(0.5, "#06b6d4");
-      gradient.addColorStop(1, "#ec4899");
+      gradient.addColorStop(0, "#8b5cf6");  // Purple
+      gradient.addColorStop(0.5, "#06b6d4"); // Cyan
+      gradient.addColorStop(1, "#ec4899");  // Pink
 
       // Draw ring
       ctx.strokeStyle = gradient;

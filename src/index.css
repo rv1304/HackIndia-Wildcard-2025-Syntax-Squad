@@ -8,60 +8,60 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* AuthX Color Scheme */
-    --background: 219 35% 7%; /* Deep Space Black #0B0E14 */
-    --foreground: 200 10% 98%; /* Soft White #F8F9FA */
+    /* Indigo-Purple-Pink Color Scheme */
+    --background: 230 60% 8%; /* Deep indigo base */
+    --foreground: 210 20% 98%; /* Soft White */
 
     /* Card with glassmorphic effect */
-    --card: 220 25% 10%; /* Graphite Gray #11151C */
-    --card-foreground: 200 10% 98%;
+    --card: 235 50% 15%; /* Purple-slate cards */
+    --card-foreground: 210 20% 98%;
 
-    --popover: 220 25% 10%;
-    --popover-foreground: 200 10% 98%;
+    --popover: 235 50% 15%;
+    --popover-foreground: 210 20% 98%;
 
-    /* Primary - Neon Aqua */
-    --primary: 165 100% 50%; /* #00FFC6 */
-    --primary-foreground: 219 35% 7%;
+    /* Primary - Vibrant Purple */
+    --primary: 270 91% 65%; /* #8b5cf6 Purple */
+    --primary-foreground: 210 20% 98%;
 
-    /* Secondary - Mint Glow */
-    --secondary: 158 100% 65%; /* #4DFFB8 */
-    --secondary-foreground: 219 35% 7%;
+    /* Secondary - Deep Purple */
+    --secondary: 235 50% 25%; /* Darker purple-gray */
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 220 25% 10%;
-    --muted-foreground: 215 10% 63%; /* Cool Gray #9BA0A8 */
+    --muted: 235 50% 12%;
+    --muted-foreground: 217 10% 64%; /* Cool Gray */
 
-    /* Accent - Same as primary for consistency */
-    --accent: 165 100% 50%;
-    --accent-foreground: 219 35% 7%;
+    /* Accent - Cyan for highlights */
+    --accent: 190 95% 60%; /* #06b6d4 Cyan */
+    --accent-foreground: 210 20% 98%;
 
-    --destructive: 346 100% 61%; /* Neon Pink-Red #FF3B6C */
-    --destructive-foreground: 200 10% 98%;
+    --destructive: 330 81% 60%; /* Pink-red */
+    --destructive-foreground: 210 20% 98%;
 
     /* Subtle borders with glow */
-    --border: 220 25% 15%;
-    --input: 220 25% 10%;
-    --ring: 165 100% 50%;
+    --border: 235 50% 20%;
+    --input: 235 50% 15%;
+    --ring: 270 91% 65%;
 
     --radius: 0.75rem;
 
     /* Custom design tokens */
-    --primary-glow: 158 100% 65%; /* Mint Glow */
-    --accent-glow: 158 100% 65%;
-    --success: 142 91% 56%; /* Bright Neon Green #21F07D */
-    --warning: 346 100% 61%; /* Using Neon Pink-Red for warnings */
+    --primary-glow: 190 95% 60%; /* Cyan glow */
+    --accent-glow: 330 81% 60%; /* Pink glow */
+    --success: 142 76% 36%; /* Green */
+    --warning: 38 92% 50%; /* Orange */
     
-    /* AuthX Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(165 100% 50%), hsl(158 100% 65%));
-    --gradient-accent: linear-gradient(135deg, hsl(165 100% 50%), hsl(158 100% 65%));
-    --gradient-dark: linear-gradient(180deg, hsl(219 35% 7%), hsl(220 25% 10%));
-    --gradient-card: linear-gradient(135deg, hsl(220 25% 12%), hsl(220 25% 8%));
-    --gradient-glow: radial-gradient(circle, hsl(165 100% 50% / 0.3), transparent);
+    /* Indigo-Purple-Pink Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(190 95% 60%), hsl(270 91% 65%), hsl(330 81% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(270 91% 65%), hsl(330 81% 60%));
+    --gradient-dark: linear-gradient(180deg, hsl(230 60% 8%), hsl(235 50% 15%));
+    --gradient-card: linear-gradient(135deg, hsl(235 50% 18%), hsl(235 50% 12%));
+    --gradient-glow: radial-gradient(circle, hsl(270 91% 65% / 0.4), hsl(190 95% 60% / 0.3), transparent);
     
-    /* AuthX Shadows - with signature neon glow */
-    --shadow-glow: 0 0 20px hsl(165 100% 50% / 0.6);
-    --shadow-glow-accent: 0 0 20px hsl(158 100% 65% / 0.5);
-    --shadow-card: 0 10px 40px hsl(219 35% 2% / 0.8);
-    --shadow-elevated: 0 20px 60px hsl(219 35% 2% / 0.9);
+    /* Vibrant Shadows */
+    --shadow-glow: 0 0 30px hsl(270 91% 65% / 0.6), 0 0 60px hsl(190 95% 60% / 0.4);
+    --shadow-glow-accent: 0 0 30px hsl(190 95% 60% / 0.5), 0 0 60px hsl(330 81% 60% / 0.4);
+    --shadow-card: 0 10px 40px hsl(230 60% 4% / 0.8);
+    --shadow-elevated: 0 20px 60px hsl(230 60% 4% / 0.9);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -78,42 +78,42 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* AuthX Dark mode (same as default) */
-    --background: 219 35% 7%;
-    --foreground: 200 10% 98%;
+    /* Indigo-Purple-Pink Dark mode */
+    --background: 230 60% 8%;
+    --foreground: 210 20% 98%;
 
-    --card: 220 25% 10%;
-    --card-foreground: 200 10% 98%;
+    --card: 235 50% 15%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 220 25% 10%;
-    --popover-foreground: 200 10% 98%;
+    --popover: 235 50% 15%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 165 100% 50%;
-    --primary-foreground: 219 35% 7%;
+    --primary: 270 91% 65%;
+    --primary-foreground: 210 20% 98%;
 
-    --secondary: 158 100% 65%;
-    --secondary-foreground: 219 35% 7%;
+    --secondary: 235 50% 25%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 220 25% 10%;
-    --muted-foreground: 215 10% 63%;
+    --muted: 235 50% 12%;
+    --muted-foreground: 217 10% 64%;
 
-    --accent: 165 100% 50%;
-    --accent-foreground: 219 35% 7%;
+    --accent: 190 95% 60%;
+    --accent-foreground: 210 20% 98%;
 
-    --destructive: 346 100% 61%;
-    --destructive-foreground: 200 10% 98%;
+    --destructive: 330 81% 60%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 220 25% 15%;
-    --input: 220 25% 10%;
-    --ring: 165 100% 50%;
-    --sidebar-background: 220 25% 8%;
-    --sidebar-foreground: 200 10% 95%;
-    --sidebar-primary: 165 100% 50%;
-    --sidebar-primary-foreground: 219 35% 7%;
-    --sidebar-accent: 220 25% 12%;
-    --sidebar-accent-foreground: 200 10% 95%;
-    --sidebar-border: 220 25% 15%;
-    --sidebar-ring: 165 100% 50%;
+    --border: 235 50% 20%;
+    --input: 235 50% 15%;
+    --ring: 270 91% 65%;
+    --sidebar-background: 235 50% 12%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 270 91% 65%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 235 50% 18%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 235 50% 20%;
+    --sidebar-ring: 270 91% 65%;
   }
 }
 
@@ -123,7 +123,9 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: linear-gradient(to bottom right, hsl(230 60% 8%), hsl(270 80% 10%), hsl(215 25% 20%));
+    min-height: 100vh;
   }
 }
 
