@@ -10,6 +10,7 @@ const Navbar = () => {
     { path: "/dashboard", label: "Dashboard", icon: Wallet },
     { path: "/verification", label: "Verification", icon: Shield },
     { path: "/marketplace", label: "Marketplace", icon: Store },
+    { path: "/list-product", label: "List Product", icon: Gem },
   ];
 
   return (
