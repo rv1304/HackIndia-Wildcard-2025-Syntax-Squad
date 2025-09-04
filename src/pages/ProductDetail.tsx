@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,10 +19,12 @@ import {
   Zap,
   Lock
 } from "lucide-react";
+import PurchaseModal from "@/components/PurchaseModal";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
 
   // Mock product data - in a real app this would come from an API
   const product = {
@@ -130,7 +133,11 @@ const ProductDetail = () => {
               </div>
 
               <div className="space-y-3">
-                <Button className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground border-0" size="lg">
+                <Button 
+                  className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground border-0" 
+                  size="lg"
+                  onClick={() => setIsPurchaseModalOpen(true)}
+                >
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   Buy Now
                 </Button>
@@ -239,6 +246,17 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Purchase Modal */}
+      <PurchaseModal
+        isOpen={isPurchaseModalOpen}
+        onClose={() => setIsPurchaseModalOpen(false)}
+        product={{
+          name: product.name,
+          price: product.price,
+          image: "/placeholder.svg"
+        }}
+      />
     </div>
   );
 };

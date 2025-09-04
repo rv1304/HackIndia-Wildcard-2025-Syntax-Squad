@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Eye, ShieldCheck, Zap } from "lucide-react";
-import PurchaseModal from "@/components/PurchaseModal";
 
 const Marketplace = () => {
   const navigate = useNavigate();
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
-
-  const handleBuyNow = (item: any) => {
-    setSelectedProduct(item);
-    setIsPurchaseModalOpen(true);
-  };
   
   const featuredItems = [
     { id: 1, name: "Quantum Portal #142", price: "3.5 ETH", likes: 234, views: 1420, verified: true, image: "/placeholder.svg" },
@@ -106,10 +98,10 @@ const Marketplace = () => {
                     <div className="flex gap-3">
                       <Button 
                         className="flex-1 bg-gradient-primary hover:opacity-90 hover:scale-105 text-primary-foreground border-0 transition-all duration-300"
-                        onClick={() => handleBuyNow(item)}
+                        onClick={() => navigate(`/product/${item.id}`)}
                       >
                         <Zap className="w-4 h-4 mr-2" />
-                        Buy Now
+                        Buy
                       </Button>
                       <Button 
                         variant="outline"
@@ -165,13 +157,6 @@ const Marketplace = () => {
         </div>
       </div>
 
-      {selectedProduct && (
-        <PurchaseModal
-          isOpen={isPurchaseModalOpen}
-          onClose={() => setIsPurchaseModalOpen(false)}
-          product={selectedProduct}
-        />
-      )}
     </div>
   );
 };
