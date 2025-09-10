@@ -11,12 +11,20 @@ export const sepoliaAlchemy: Chain = {
   },
 };
 
+export const anvilLocal: Chain = {
+  id: 31337,
+  name: "Anvil (Local)",
+  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+  rpcUrls: { default: { http: ["http://127.0.0.1:8545"] } },
+};
+
 export { anvil };
 
 export const config = createConfig({
-  chains: [sepoliaAlchemy],
+  chains: [sepoliaAlchemy, anvilLocal],
   transports: {
     [sepoliaAlchemy.id]: http("https://eth-sepolia.g.alchemy.com/v2/8nmbMWuaAdXLgqblqYNG6"),
+    [anvilLocal.id]: http("http://127.0.0.1:8545"),
   },
 });
 

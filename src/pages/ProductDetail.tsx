@@ -39,17 +39,14 @@ const ProductDetail = () => {
   useEffect(() => {
     const load = async () => {
       try {
-        const result = await (publicClient.readContract as any)({
+        const [p, seller, active] = await publicClient.readContract({
           abi: AuthXMarketplaceAbi,
           address: CONTRACTS.AuthXMarketplace,
           functionName: "getListing",
           args: [BigInt(tokenId), CONTRACTS.AuthXNFT],
         });
-        const [p, seller, active] = result as [bigint, string, boolean];
         if (active) setPrice(p);
-      } catch (error) {
-        console.log("Error loading listing:", error);
-      }
+      } catch {}
     };
     load();
   }, [tokenId]);
@@ -85,7 +82,7 @@ const ProductDetail = () => {
       const wallet = await getWalletClient();
       if (!wallet) throw new Error("No wallet");
 
-      const hash = await (wallet as any).writeContract({
+      const hash = await wallet.writeContract({
         account: address,
         abi: AuthXMarketplaceAbi,
         address: CONTRACTS.AuthXMarketplace,

@@ -41,7 +41,6 @@ const ProductListing = () => {
           args: [],
           authorizationList: [],
         });
-        console.log('Total supply:', total);
         for (let i = 0n; i < (total as bigint); i++) {
           try {
             const owner = await publicClient.readContract({
@@ -51,13 +50,8 @@ const ProductListing = () => {
               args: [i],
               authorizationList: [],
             });
-            console.log(`Token ${i} owner:`, owner, 'Current address:', address);
-            if ((owner as string).toLowerCase() === address.toLowerCase()) {
-              list.push(Number(i));
-            }
-          } catch (err) {
-            console.log(`Error checking owner of token ${i}:`, err);
-          }
+            if ((owner as string).toLowerCase() === address.toLowerCase()) list.push(Number(i));
+          } catch {}
         }
       } catch {}
       setOwnedNfts(list);
@@ -175,47 +169,15 @@ const ProductListing = () => {
   };
 
   const onSubmitForApproval = async () => {
-    if (!address) {
-      alert("Please connect your wallet first");
-      return;
-    }
-    
-    if (!tokenId) {
-      alert("Please select an NFT to list");
-      return;
-    }
-    
-    if (!priceEth || Number(priceEth) <= 0) {
-      alert("Please enter a valid price");
-      return;
-    }
-
+    if (!address) return;
     setLoading(true);
     try {
+      // pay 0.01 ETH submission fee to admin treasury (for demo, pay to seller's own address to keep funds local)
       const wallet = await getWalletClient();
-      if (!wallet) throw new Error("No wallet connected");
+      if (!wallet) throw new Error("No wallet");
+      await (wallet as any).sendTransaction({ account: address, chain: anvil, to: getAddress(CONTRACTS.AdminTreasury as `0x${string}`), value: parseEther("0.01") });
 
-      // Check if user is on the correct network
-      const chainId = await wallet.getChainId();
-      if (chainId !== 31337) {
-        throw new Error("Please switch to Anvil network (Chain ID: 31337)");
-      }
-
-      console.log("Starting transaction process...");
-
-      // Step 1: Pay submission fee
-      console.log("Step 1: Paying submission fee...");
-      const feeHash = await (wallet as any).sendTransaction({ 
-        account: address, 
-        to: getAddress(CONTRACTS.AdminTreasury as `0x${string}`), 
-        value: parseEther("0.01") 
-      });
-      console.log("Fee transaction hash:", feeHash);
-      await waitForTx(feeHash);
-      console.log("Fee transaction confirmed");
-
-      // Step 2: Verify token ownership
-      console.log("Step 2: Verifying token ownership...");
+      // Verify token exists and caller owns it
       const tid = BigInt(Number(tokenId));
       const currentOwner = await publicClient.readContract({
         abi: AuthXNFTAbi,
@@ -224,59 +186,36 @@ const ProductListing = () => {
         args: [tid],
         authorizationList: [],
       });
-      
       if ((currentOwner as string).toLowerCase() !== address.toLowerCase()) {
         throw new Error(`You do not own token #${tokenId}.`);
       }
-      console.log("Token ownership verified");
 
-      // Step 3: Approve marketplace
-      console.log("Step 3: Approving marketplace...");
-      const approveHash = await (wallet as any).writeContract({
+      // Approve marketplace and list on-chain immediately so buying can work post-approval
+      const approveHash = await wallet.writeContract({
         account: address,
+        chain: anvil,
         abi: AuthXNFTAbi,
         address: CONTRACTS.AuthXNFT,
         functionName: "setApprovalForAll",
         args: [CONTRACTS.AuthXMarketplace, true],
       });
-      console.log("Approval transaction hash:", approveHash);
       await waitForTx(approveHash);
-      console.log("Approval transaction confirmed");
 
-      // Step 4: List the asset
-      console.log("Step 4: Listing asset...");
-      const listHash = await (wallet as any).writeContract({
+      const listHash = await wallet.writeContract({
         account: address,
+        chain: anvil,
         abi: AuthXMarketplaceAbi,
         address: CONTRACTS.AuthXMarketplace,
         functionName: "listAsset",
         args: [tid, parseEther(priceEth), CONTRACTS.AuthXNFT],
       });
-      console.log("Listing transaction hash:", listHash);
       await waitForTx(listHash);
-      console.log("Listing transaction confirmed");
 
-      // Save to local storage for admin approval
       savePending();
-      
-      alert("Successfully submitted for admin approval! Your listing will appear as pending until approved by an admin.");
+      alert("Submitted for admin approval. Listing will appear as pending until approved.");
     } catch (e) {
-      console.error("Transaction failed:", e);
-      
-      // More specific error handling
-      const errorMessage = (e as any)?.message || 'Transaction failed';
-      
-      if (errorMessage.includes("User denied")) {
-        alert("Transaction was rejected by user. Please try again and approve the transaction in MetaMask.");
-      } else if (errorMessage.includes("insufficient funds")) {
-        alert("Insufficient funds. Make sure you have enough ETH for the transaction and gas fees.");
-      } else if (errorMessage.includes("Chain ID")) {
-        alert("Wrong network. Please switch to Anvil network (Chain ID: 31337) in MetaMask.");
-      } else if (errorMessage.includes("gas")) {
-        alert("Gas estimation failed. The transaction might fail. Please check your input values.");
-      } else {
-        alert(`Transaction failed: ${errorMessage}`);
-      }
+      console.error(e);
+      alert((e as any)?.message || 'Submission failed');
     } finally {
       setLoading(false);
     }
@@ -401,7 +340,7 @@ const ProductListing = () => {
             </div>
 
             <div>
-              <Label className="mb-2 flex items-center">
+              <Label className="mb-2 block flex items-center">
                 <DollarSign className="w-4 h-4 mr-2" />
                 Price (in ETH)
               </Label>
@@ -456,22 +395,9 @@ const ProductListing = () => {
           )}
 
           <div className="grid md:grid-cols-1 gap-3">
-            <Button 
-              onClick={onSubmitForApproval} 
-              disabled={loading || !tokenId || !priceEth || !address} 
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/80"
-            >
-              {loading ? "Processing Transaction..." : "Submit for Admin Approval (0.01 ETH)"}
+            <Button onClick={onSubmitForApproval} disabled={loading || !tokenId} className="w-full bg-primary text-primary-foreground hover:bg-primary/80">
+              {loading ? "Submitting…" : "Submit for Admin Approval (0.01 ETH)"}
             </Button>
-            {!address && (
-              <p className="text-sm text-yellow-600 text-center">Please connect your wallet first</p>
-            )}
-            {address && !tokenId && (
-              <p className="text-sm text-yellow-600 text-center">Please select an NFT to list</p>
-            )}
-            {address && tokenId && !priceEth && (
-              <p className="text-sm text-yellow-600 text-center">Please enter a price</p>
-            )}
           </div>
         </Card>
       </div>

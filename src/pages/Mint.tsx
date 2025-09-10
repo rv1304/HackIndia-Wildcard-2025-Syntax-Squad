@@ -8,7 +8,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getWalletClient, publicClient, anvil } from "../lib/wagmi";
 import { waitForTx } from "../lib/tx";
 import { CONTRACTS } from "../config/contracts";
+<<<<<<< HEAD
 import { AuthXNFTAbi } from "../abi/index";
+=======
+import { AuthXNFTAbi } from "../abi";
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
 import { useAccount } from "wagmi";
 
 export default function Mint() {
@@ -66,9 +70,13 @@ export default function Mint() {
         functionName: 'mintPhigitalAsset',
         args: [address, uri, category, 0n, requiresInspection],
         value: 0n,
+<<<<<<< HEAD
         gas: 300000n,
         maxFeePerGas: 20000000000n, // 20 gwei
         maxPriorityFeePerGas: 1000000000n, // 1 gwei
+=======
+        gas: 200000n,
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
       });
 
       console.log("Transaction submitted", { txHash: hash });

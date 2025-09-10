@@ -30,15 +30,22 @@ export default function AdminApprovals() {
     const verifiedPending: any[] = [];
     for (const item of allPending) {
       try {
+<<<<<<< HEAD
         const result = await (publicClient.readContract as any)({
+=======
+        const [price, seller, active] = await publicClient.readContract({
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
           abi: AuthXMarketplaceAbi,
           address: CONTRACTS.AuthXMarketplace,
           functionName: 'getListing',
           args: [BigInt(item.tokenId), CONTRACTS.AuthXNFT],
         });
         
+<<<<<<< HEAD
         const [price, seller, active] = result as [bigint, string, boolean];
         
+=======
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
         // Verify it's inactive and matches the seller
         if (!active && price > 0n && seller.toLowerCase() === item.seller.toLowerCase()) {
           verifiedPending.push({
@@ -64,7 +71,11 @@ export default function AdminApprovals() {
       // Approve listing on-chain (activates it)
       const wallet = await getWalletClient();
       if (!wallet || !address) throw new Error("No wallet/account");
+<<<<<<< HEAD
       const hash = await (wallet as any).writeContract({
+=======
+      const hash = await wallet.writeContract({
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
         account: address,
         abi: AuthXMarketplaceAbi,
         address: CONTRACTS.AuthXMarketplace,
@@ -103,7 +114,11 @@ export default function AdminApprovals() {
       const wallet = await getWalletClient();
       if (!wallet || !address) throw new Error("No wallet/account");
       // Refund 0.01 ETH to seller
+<<<<<<< HEAD
       await (wallet as any).sendTransaction({ account: address, to: item.seller, value: parseEther("0.01") });
+=======
+      await wallet.sendTransaction({ account: address, to: item.seller, value: parseEther("0.01") });
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
       
       // Remove from the specific account's pending list
       const sellerAddress = item.seller;

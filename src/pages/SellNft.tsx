@@ -26,6 +26,7 @@ export default function SellNft() {
     const loadOwnedNfts = async () => {
       if (!address) return;
       const list: number[] = [];
+<<<<<<< HEAD
       try {
         const total = await publicClient.readContract({
           abi: AuthXNFTAbi,
@@ -53,6 +54,20 @@ export default function SellNft() {
         }
       } catch (err) {
         console.error('Error loading total supply:', err);
+=======
+      for (let i = 0n; i < 200n; i++) {
+        try {
+          const owner = await publicClient.readContract({
+            abi: AuthXNFTAbi,
+            address: CONTRACTS.AuthXNFT,
+            functionName: 'ownerOf',
+            args: [i],
+          });
+          if ((owner as string).toLowerCase() === address.toLowerCase()) {
+            list.push(Number(i));
+          }
+        } catch {}
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
       }
       setOwnedNfts(list);
     };
@@ -82,6 +97,7 @@ export default function SellNft() {
         functionName: 'approve',
         args: [CONTRACTS.AuthXMarketplace, BigInt(selectedNft)],
         account: address,
+<<<<<<< HEAD
         chain: {
           id: 31337,
           name: "Anvil (Local)",
@@ -91,6 +107,8 @@ export default function SellNft() {
         gas: 200000n,
         maxFeePerGas: 20000000000n, // 20 gwei
         maxPriorityFeePerGas: 1000000000n, // 1 gwei
+=======
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
       });
       await waitForTx(approveHash);
 
@@ -101,6 +119,7 @@ export default function SellNft() {
         functionName: 'listAsset',
         args: [BigInt(selectedNft), parseEther(price), CONTRACTS.AuthXNFT],
         account: address,
+<<<<<<< HEAD
         chain: {
           id: 31337,
           name: "Anvil (Local)",
@@ -110,6 +129,8 @@ export default function SellNft() {
         gas: 300000n,
         maxFeePerGas: 20000000000n, // 20 gwei
         maxPriorityFeePerGas: 1000000000n, // 1 gwei
+=======
+>>>>>>> 1e851595ae0f0b837ef639a22767adb445fbfb26
       });
       await waitForTx(txHash);
 

@@ -17,7 +17,6 @@ import MyNfts from "./pages/MyNfts";
 import Login from "./pages/Login";
 import AdminApprovals from "./pages/AdminApprovals";
 import SellNft from "./pages/SellNft";
-import WalletTest from "./pages/WalletTest";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +41,6 @@ const App = () => (
             <Route path="/sell-nft" element={<SellNft />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin/approvals" element={<AdminApprovals />} />
-            <Route path="/wallet-test" element={<WalletTest />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <DebugPanel />
